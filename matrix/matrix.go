@@ -75,7 +75,7 @@ func get_row(a []float64, b[][]float64, row int, c chan Result) {
 	c <- Result{row, res}
 }
 
-// useless
+// useless, better than single threaded
 func Multiply_MM (a, b [][]float64) [][]float64 {
 	a_row_s := len(a)
 	a_col_s := len(a[0])
@@ -104,22 +104,17 @@ func Multiply_MM (a, b [][]float64) [][]float64 {
 }
 
 func get_row_m(a []float64, b[][]float64, row int, c chan ResultM) {
-	n := len(b)
 	iter := len(b[0])
 	for col := 0; col < iter; col++ {
-		col_mat := make([]float64, n)
-		for index := 0; index < n; index++ {
-			col_mat[index] = b[index][col]
-		}
-		go get_index_value(a, col_mat, row, col, c)
+		go get_index_value(a, b, row, col, c)
 	}
 }
 
-func get_index_value(a, b []float64, row, col int, c chan ResultM) {
+func get_index_value(a []float64, b [][]float64, row, col int, c chan ResultM) {
 	n := len(a)
 	res := 0.0
 	for i := 0; i < n; i++ {
-		res += a[i] * b[i]
+		res += a[i] * b[col][i]
 	}
 	c <- ResultM{row, col, res}
 }
