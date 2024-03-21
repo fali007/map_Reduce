@@ -66,8 +66,8 @@ func Multiply_M(a, b [][]float64) [][]float64{
 }
 
 func get_row(a []float64, b[][]float64, row int, c chan Result) {
-	res := make([]float64, len(b))
-	for col := 0; col < len(a); col++ {
+	res := make([]float64, len(b[0]))
+	for col := 0; col < len(b[0]); col++ {
 		for index := 0; index < len(a); index++ {
 			res[col] += a[index] * b[index][col]
 		}
