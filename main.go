@@ -10,8 +10,8 @@ import (
 func main() {
 	fmt.Println("Hello, welcome to search")
 	// search.Search("key", "../../sustainableComputing")
-	m := matrix.Generate_matrix(1000)
-	n := matrix.Generate_matrix(1000)
+	m := matrix.Generate_matrix(2000)
+	n := matrix.Generate_matrix(2000)
 	// fmt.Printf("%+v\n%+v\n", m, n)
 
 	t1 := time.Now()
